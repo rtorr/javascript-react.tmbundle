@@ -6,24 +6,7 @@
 	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>#!/usr/bin/env bash
-IFS=""
-
-jsxhint $TM_FILEPATH
-
-if [ ! $? -eq 0 ]; then
-	exit
-fi
-
-JSX_TEMP=$(mktemp ${TM_DIRECTORY}/.jsx-compile.XXXXXX)
-JSX_OUTPUT=$(jsx $TM_FILEPATH 2&gt;&amp;1 &gt; $JSX_TEMP)
-
-if [ $? -eq 0 ]; then
-	mv $JSX_TEMP ${TM_FILEPATH:0: -1}
-else
-	rm $JSX_TEMP
-fi
-
-echo $JSX_OUTPUT | perl -pe 's/\e\[?.*?[\@-~]//g'</string>
+echo $(jsxhint $TM_FILEPATH)</string>
 	<key>input</key>
 	<string>document</string>
 	<key>inputFormat</key>
